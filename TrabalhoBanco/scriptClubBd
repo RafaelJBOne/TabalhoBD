@@ -8,19 +8,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema Clube
+-- Schema Clube2
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema Clube
+-- Schema Clube2
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Clube` DEFAULT CHARACTER SET utf8mb3 ;
-USE `Clube` ;
+CREATE SCHEMA IF NOT EXISTS `Clube2` DEFAULT CHARACTER SET utf8mb3 ;
+USE `Clube2` ;
 
 -- -----------------------------------------------------
--- Table `Clube`.`Pais`
+-- Table `Clube2`.`Pais`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Pais` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Pais` (
   `id_pais` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id_pais`))
@@ -29,9 +29,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`UF`
+-- Table `Clube2`.`UF`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`UF` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`UF` (
   `id_uf` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   `Pais_id_pais` INT NOT NULL,
@@ -39,15 +39,15 @@ CREATE TABLE IF NOT EXISTS `Clube`.`UF` (
   INDEX `fk_UF_Pais1_idx` (`Pais_id_pais` ASC) VISIBLE,
   CONSTRAINT `fk_UF_Pais1`
     FOREIGN KEY (`Pais_id_pais`)
-    REFERENCES `Clube`.`Pais` (`id_pais`))
+    REFERENCES `Clube2`.`Pais` (`id_pais`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Cidade`
+-- Table `Clube2`.`Cidade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Cidade` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Cidade` (
   `id_cidade` INT NOT NULL,
   `ddd` INT NULL DEFAULT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
@@ -56,49 +56,49 @@ CREATE TABLE IF NOT EXISTS `Clube`.`Cidade` (
   INDEX `fk_Cidade_UF1_idx` (`UF_id_uf` ASC) VISIBLE,
   CONSTRAINT `fk_Cidade_UF1`
     FOREIGN KEY (`UF_id_uf`)
-    REFERENCES `Clube`.`UF` (`id_uf`))
+    REFERENCES `Clube2`.`UF` (`id_uf`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Rua`
+-- Table `Clube2`.`Bairro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Rua` (
-  `id_rua` INT NOT NULL,
-  `Descricao` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_rua`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `Clube`.`Bairro`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Bairro` (
-  `id_bairrro` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `Clube2`.`Bairro` (
+  `id_bairro` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   `Cidade_id_cidade` INT NOT NULL,
-  `Rua_id_rua` INT NOT NULL,
-  PRIMARY KEY (`id_bairrro`),
-  INDEX `fk_Bairrro_Cidade1_idx` (`Cidade_id_cidade` ASC) VISIBLE,
-  INDEX `fk_Bairrro_Rua1_idx` (`Rua_id_rua` ASC) VISIBLE,
-  CONSTRAINT `fk_Bairrro_Cidade1`
+  PRIMARY KEY (`id_bairro`),
+  INDEX `fk_Bairro_Cidade1_idx` (`Cidade_id_cidade` ASC) VISIBLE,
+  CONSTRAINT `fk_Bairro_Cidade1`
     FOREIGN KEY (`Cidade_id_cidade`)
-    REFERENCES `Clube`.`Cidade` (`id_cidade`),
-  CONSTRAINT `fk_Bairrro_Rua1`
-    FOREIGN KEY (`Rua_id_rua`)
-    REFERENCES `Clube`.`Rua` (`id_rua`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `Clube2`.`Cidade` (`id_cidade`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Cargo`
+-- Table `Clube2`.`Bairro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Cargo` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Bairro` (
+  `id_bairro` INT NOT NULL,
+  `descrição` VARCHAR(100) NULL DEFAULT NULL,
+  `Cidade_id_cidade` INT NOT NULL,
+  PRIMARY KEY (`id_bairro`),
+  INDEX `fk_Bairro_Cidade1_idx` (`Cidade_id_cidade` ASC) VISIBLE,
+  CONSTRAINT `fk_Bairro_Cidade1`
+    FOREIGN KEY (`Cidade_id_cidade`)
+    REFERENCES `Clube2`.`Cidade` (`id_cidade`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `Clube2`.`Cargo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Clube2`.`Cargo` (
   `id_cargo` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id_cargo`))
@@ -107,9 +107,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Dependente`
+-- Table `Clube2`.`Dependente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Dependente` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Dependente` (
   `id_dependente` INT NOT NULL,
   `data_entrada` DATE NULL DEFAULT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
@@ -119,9 +119,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Sócio`
+-- Table `Clube2`.`Sócio`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Sócio` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Sócio` (
   `id_socio` INT NOT NULL,
   `data_ingreso` DATE NULL DEFAULT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
@@ -131,9 +131,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Tipo_Cartão`
+-- Table `Clube2`.`Tipo_Cartão`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Tipo_Cartão` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Tipo_Cartão` (
   `id_tipo_cartão` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id_tipo_cartão`))
@@ -142,9 +142,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Cartão`
+-- Table `Clube2`.`Cartão`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Cartão` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Cartão` (
   `id_cartão` INT NOT NULL,
   `número` VARCHAR(100) NULL DEFAULT NULL,
   `Tipo_Cartão_id_tipo_cartão` INT NOT NULL,
@@ -156,21 +156,21 @@ CREATE TABLE IF NOT EXISTS `Clube`.`Cartão` (
   INDEX `fk_Cartão_Sócio1_idx` (`Sócio_id_socio` ASC) VISIBLE,
   CONSTRAINT `fk_Cartão_Dependente1`
     FOREIGN KEY (`Dependente_id_dependente`)
-    REFERENCES `Clube`.`Dependente` (`id_dependente`),
+    REFERENCES `Clube2`.`Dependente` (`id_dependente`),
   CONSTRAINT `fk_Cartão_Sócio1`
     FOREIGN KEY (`Sócio_id_socio`)
-    REFERENCES `Clube`.`Sócio` (`id_socio`),
+    REFERENCES `Clube2`.`Sócio` (`id_socio`),
   CONSTRAINT `fk_Cartão_Tipo_Cartão1`
     FOREIGN KEY (`Tipo_Cartão_id_tipo_cartão`)
-    REFERENCES `Clube`.`Tipo_Cartão` (`id_tipo_cartão`))
+    REFERENCES `Clube2`.`Tipo_Cartão` (`id_tipo_cartão`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Tipo_Endereço`
+-- Table `Clube2`.`Tipo_Endereço`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Tipo_Endereço` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Tipo_Endereço` (
   `id_tipo_endereço` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id_tipo_endereço`))
@@ -179,32 +179,33 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Endereço`
+-- Table `Clube2`.`Endereço`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Endereço` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Endereço` (
   `id_endereço` INT NOT NULL,
   `numero` INT NULL DEFAULT NULL,
+  `ce0` VARCHAR(10) NULL DEFAULT NULL,
   `complemento` VARCHAR(100) NULL DEFAULT NULL,
   `rua` VARCHAR(40) NULL DEFAULT NULL,
-  `Bairrro_id_bairrro` INT NOT NULL,
+  `Bairro_id_bairro` INT NOT NULL,
   `Tipo_Endereço_id_tipo_endereço` INT NOT NULL,
   PRIMARY KEY (`id_endereço`),
-  INDEX `fk_Endereço_Bairrro1_idx` (`Bairrro_id_bairrro` ASC) VISIBLE,
+  INDEX `fk_Endereço_Bairro1_idx` (`Bairro_id_bairro` ASC) VISIBLE,
   INDEX `fk_Endereço_Tipo_Endereço1_idx` (`Tipo_Endereço_id_tipo_endereço` ASC) VISIBLE,
-  CONSTRAINT `fk_Endereço_Bairrro1`
-    FOREIGN KEY (`Bairrro_id_bairrro`)
-    REFERENCES `Clube`.`Bairro` (`id_bairrro`),
+  CONSTRAINT `fk_Endereço_Bairro1`
+    FOREIGN KEY (`Bairro_id_bairro`)
+    REFERENCES `Clube2`.`Bairro` (`id_bairro`),
   CONSTRAINT `fk_Endereço_Tipo_Endereço1`
     FOREIGN KEY (`Tipo_Endereço_id_tipo_endereço`)
-    REFERENCES `Clube`.`Tipo_Endereço` (`id_tipo_endereço`))
+    REFERENCES `Clube2`.`Tipo_Endereço` (`id_tipo_endereço`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Escolaridade`
+-- Table `Clube2`.`Escolaridade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Escolaridade` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Escolaridade` (
   `id_escolaridade` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id_escolaridade`))
@@ -213,9 +214,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Estado_civil`
+-- Table `Clube2`.`Estado_civil`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Estado_civil` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Estado_civil` (
   `id_estado_civil` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id_estado_civil`))
@@ -224,9 +225,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Filiação`
+-- Table `Clube2`.`Filiação`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Filiação` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Filiação` (
   `id_filiação` INT NOT NULL,
   `nome_pai` VARCHAR(40) NULL DEFAULT NULL,
   `nome_mae` VARCHAR(40) NULL DEFAULT NULL,
@@ -236,9 +237,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Genero`
+-- Table `Clube2`.`Genero`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Genero` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Genero` (
   `id_genero` INT NOT NULL,
   `descri;'ao` VARCHAR(100) NULL DEFAULT NULL,
   `Generocol` VARCHAR(45) NULL DEFAULT NULL,
@@ -248,20 +249,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Tipo_Pagamento`
+-- Table `Clube2`.`produto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Tipo_Pagamento` (
-  `id_tipo_pagamento` INT NOT NULL,
-  `descri;'ao` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id_tipo_pagamento`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `Clube`.`Produto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Produto` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`produto` (
   `id_produto` INT NOT NULL,
   `nome` VARCHAR(100) NULL DEFAULT NULL,
   `validade` DATE NULL DEFAULT NULL,
@@ -272,35 +262,41 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Pagamento`
+-- Table `Clube2`.`Tipo_Pagamento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Pagamento` (
-  `id_pagamento` INT NOT NULL,
-  `valor` VARCHAR(10) NOT NULL,
-  `Tipo_Pagamento_id_tipo_pagamento` INT NOT NULL,
-  `produto_id_produto` INT NOT NULL,
-  `Produto_id_produto` INT NOT NULL,
-  PRIMARY KEY (`id_pagamento`, `produto_id_produto`),
-  INDEX `fk_Pagamento_Tipo_Pagamento_idx` (`Tipo_Pagamento_id_tipo_pagamento` ASC) VISIBLE,
-  INDEX `fk_Pagamento_Produto1_idx` (`Produto_id_produto` ASC) VISIBLE,
-  CONSTRAINT `fk_Pagamento_Tipo_Pagamento`
-    FOREIGN KEY (`Tipo_Pagamento_id_tipo_pagamento`)
-    REFERENCES `Clube`.`Tipo_Pagamento` (`id_tipo_pagamento`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT,
-  CONSTRAINT `fk_Pagamento_Produto1`
-    FOREIGN KEY (`Produto_id_produto`)
-    REFERENCES `Clube`.`Produto` (`id_produto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `Clube2`.`Tipo_Pagamento` (
+  `id_tipo_pagamento` INT NOT NULL,
+  `descri;'ao` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id_tipo_pagamento`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Historico_Pagamento`
+-- Table `Clube2`.`Pagamento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Historico_Pagamento` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Pagamento` (
+  `id_pagamento` INT NOT NULL,
+  `valor` VARCHAR(10) NOT NULL,
+  `Tipo_Pagamento_id_tipo_pagamento` INT NOT NULL,
+  `produto_id_produto` INT NOT NULL,
+  PRIMARY KEY (`id_pagamento`, `produto_id_produto`),
+  INDEX `fk_Pagamento_Tipo_Pagamento_idx` (`Tipo_Pagamento_id_tipo_pagamento` ASC) VISIBLE,
+  INDEX `fk_Pagamento_produto1_idx` (`produto_id_produto` ASC) VISIBLE,
+  CONSTRAINT `fk_Pagamento_produto1`
+    FOREIGN KEY (`produto_id_produto`)
+    REFERENCES `Clube2`.`produto` (`id_produto`),
+  CONSTRAINT `fk_Pagamento_Tipo_Pagamento`
+    FOREIGN KEY (`Tipo_Pagamento_id_tipo_pagamento`)
+    REFERENCES `Clube2`.`Tipo_Pagamento` (`id_tipo_pagamento`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `Clube2`.`Historico_Pagamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Clube2`.`Historico_Pagamento` (
   `Cartão_id_cartão` INT NOT NULL,
   `Pagamento_id_pagamento` INT NOT NULL,
   PRIMARY KEY (`Cartão_id_cartão`, `Pagamento_id_pagamento`),
@@ -308,18 +304,18 @@ CREATE TABLE IF NOT EXISTS `Clube`.`Historico_Pagamento` (
   INDEX `fk_Cartão_has_Pagamento_Cartão1_idx` (`Cartão_id_cartão` ASC) VISIBLE,
   CONSTRAINT `fk_Cartão_has_Pagamento_Cartão1`
     FOREIGN KEY (`Cartão_id_cartão`)
-    REFERENCES `Clube`.`Cartão` (`id_cartão`),
+    REFERENCES `Clube2`.`Cartão` (`id_cartão`),
   CONSTRAINT `fk_Cartão_has_Pagamento_Pagamento1`
     FOREIGN KEY (`Pagamento_id_pagamento`)
-    REFERENCES `Clube`.`Pagamento` (`id_pagamento`))
+    REFERENCES `Clube2`.`Pagamento` (`id_pagamento`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Tipo_Telefone`
+-- Table `Clube2`.`Tipo_Telefone`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Tipo_Telefone` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Tipo_Telefone` (
   `id_tipo_telefone` INT NOT NULL,
   `descrição` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id_tipo_telefone`))
@@ -328,9 +324,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Telefone`
+-- Table `Clube2`.`Telefone`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Telefone` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Telefone` (
   `id_telefone` INT NOT NULL,
   `numero` VARCHAR(20) NOT NULL,
   `Tipo_Telefone_id_tipo_telefone` INT NOT NULL,
@@ -340,18 +336,18 @@ CREATE TABLE IF NOT EXISTS `Clube`.`Telefone` (
   INDEX `fk_Telefone_Cidade1_idx` (`Cidade_id_cidade` ASC) VISIBLE,
   CONSTRAINT `fk_Telefone_Cidade1`
     FOREIGN KEY (`Cidade_id_cidade`)
-    REFERENCES `Clube`.`Cidade` (`id_cidade`),
+    REFERENCES `Clube2`.`Cidade` (`id_cidade`),
   CONSTRAINT `fk_Telefone_Tipo_Telefone1`
     FOREIGN KEY (`Tipo_Telefone_id_tipo_telefone`)
-    REFERENCES `Clube`.`Tipo_Telefone` (`id_tipo_telefone`))
+    REFERENCES `Clube2`.`Tipo_Telefone` (`id_tipo_telefone`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Pessoa`
+-- Table `Clube2`.`Pessoa`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Pessoa` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Pessoa` (
   `id_pessoa` INT NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
   `cpf` VARCHAR(20) NOT NULL,
@@ -381,42 +377,55 @@ CREATE TABLE IF NOT EXISTS `Clube`.`Pessoa` (
   INDEX `fk_Pessoa_Escolaridade1_idx` (`Escolaridade_id_escolaridade` ASC) VISIBLE,
   CONSTRAINT `fk_Pessoa_Cidade1`
     FOREIGN KEY (`Cidade_id_cidade`)
-    REFERENCES `Clube`.`Cidade` (`id_cidade`),
+    REFERENCES `Clube2`.`Cidade` (`id_cidade`),
   CONSTRAINT `fk_Pessoa_Dependente1`
     FOREIGN KEY (`Dependente_id_dependente`)
-    REFERENCES `Clube`.`Dependente` (`id_dependente`),
+    REFERENCES `Clube2`.`Dependente` (`id_dependente`),
   CONSTRAINT `fk_Pessoa_Endereço1`
     FOREIGN KEY (`Endereço_id_endereço`)
-    REFERENCES `Clube`.`Endereço` (`id_endereço`),
+    REFERENCES `Clube2`.`Endereço` (`id_endereço`),
   CONSTRAINT `fk_Pessoa_Escolaridade1`
     FOREIGN KEY (`Escolaridade_id_escolaridade`)
-    REFERENCES `Clube`.`Escolaridade` (`id_escolaridade`),
+    REFERENCES `Clube2`.`Escolaridade` (`id_escolaridade`),
   CONSTRAINT `fk_Pessoa_Estado_civil1`
     FOREIGN KEY (`Estado_civil_id_estado_civil`)
-    REFERENCES `Clube`.`Estado_civil` (`id_estado_civil`),
+    REFERENCES `Clube2`.`Estado_civil` (`id_estado_civil`),
   CONSTRAINT `fk_Pessoa_Filiação1`
     FOREIGN KEY (`Filiação_id_filiação`)
-    REFERENCES `Clube`.`Filiação` (`id_filiação`),
+    REFERENCES `Clube2`.`Filiação` (`id_filiação`),
   CONSTRAINT `fk_Pessoa_Genero1`
     FOREIGN KEY (`Genero_id_genero`)
-    REFERENCES `Clube`.`Genero` (`id_genero`),
+    REFERENCES `Clube2`.`Genero` (`id_genero`),
   CONSTRAINT `fk_Pessoa_Pais1`
     FOREIGN KEY (`Pais_id_pais`)
-    REFERENCES `Clube`.`Pais` (`id_pais`),
+    REFERENCES `Clube2`.`Pais` (`id_pais`),
   CONSTRAINT `fk_Pessoa_Sócio1`
     FOREIGN KEY (`Sócio_id_socio`)
-    REFERENCES `Clube`.`Sócio` (`id_socio`),
+    REFERENCES `Clube2`.`Sócio` (`id_socio`),
   CONSTRAINT `fk_Pessoa_Telefone1`
     FOREIGN KEY (`Telefone_id_telefone`)
-    REFERENCES `Clube`.`Telefone` (`id_telefone`))
+    REFERENCES `Clube2`.`Telefone` (`id_telefone`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `Clube`.`Relacao_Cargos`
+-- Table `Clube2`.`Produto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Clube`.`Relacao_Cargos` (
+CREATE TABLE IF NOT EXISTS `Clube2`.`Produto` (
+  `id_produto` INT NOT NULL,
+  `nome` VARCHAR(100) NULL DEFAULT NULL,
+  `validade` DATE NULL DEFAULT NULL,
+  `descrição` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_produto`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `Clube2`.`Relacao_Cargos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Clube2`.`Relacao_Cargos` (
   `Pessoa_id_pessoa` INT NOT NULL,
   `Cargo_id_cargo` INT NOT NULL,
   PRIMARY KEY (`Pessoa_id_pessoa`, `Cargo_id_cargo`),
@@ -424,15 +433,191 @@ CREATE TABLE IF NOT EXISTS `Clube`.`Relacao_Cargos` (
   INDEX `fk_Pessoa_has_Cargo_Pessoa1_idx` (`Pessoa_id_pessoa` ASC) VISIBLE,
   CONSTRAINT `fk_Pessoa_has_Cargo_Cargo1`
     FOREIGN KEY (`Cargo_id_cargo`)
-    REFERENCES `Clube`.`Cargo` (`id_cargo`),
+    REFERENCES `Clube2`.`Cargo` (`id_cargo`),
   CONSTRAINT `fk_Pessoa_has_Cargo_Pessoa1`
     FOREIGN KEY (`Pessoa_id_pessoa`)
-    REFERENCES `Clube`.`Pessoa` (`id_pessoa`))
+    REFERENCES `Clube2`.`Pessoa` (`id_pessoa`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `Clube2`.`Rua`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Clube2`.`Rua` (
+  `id_rua` INT NOT NULL,
+  `Descricao` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_rua`))
+  CONSTRAINT `fk_Bairro`
+  FOREIGN KEY (`Cidade_id_bairro`)
+  REFERENCES `Clube2`.`Bairro` (`id_bairro`),
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `Clube2`.`Tipo_Pessoa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Clube2`.`Tipo_Pessoa` (
+  `id_tipo_pessoa` INT NOT NULL,
+  `descrição` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id_tipo_pessoa`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+-- -----------------------------------------------------
+-- Table `Clube2`.`Cidade`
+-- -----------------------------------------------------
+
+insert into Pais
+values
+(1,'Brasil'),
+(2,'Vietna'),
+(3,'Mexico'),
+(4,'Chile'),
+(5,'Belgica');
+
+insert into UF
+values
+(1,'Piaui',1),
+(2,'Dong',2),
+(3,'Caracas',3),
+(4,'Andes',4),
+(5,'Sla',5);
+
+insert into Cidade
+values
+(1,55,'Rua de tal',1),
+(2,59,'Rua de Caracas',2),
+(3,95,'Rutal',3),
+(4,84,'Rude',4),
+(5,66,'Rual',5);
+
+insert into Bairro 
+values
+(1,'St Oficina',1),
+(2,'St Escolar',2),
+(3,'St Militar',3),
+(4,'St Medico',4),
+(5,'St Bancario',5);
+
+inset into Rua
+values
+(1,'Rua dos bobos'),
+(2,'Vivendas da Barra'),
+(3,'Anywhere'),
+(4,'Casa do Baralho'),
+(5,'Caba da Mocinha');
+
+insert into Tipo_Telefone
+values
+(1,'Residencial'),
+(2,'Comercial'),
+(3,'Residencial'),
+(4,'Comercial'),
+(5,'Residencial');
+
+insert into Tipo_Pagamento
+values
+(1,'Cheque'),
+(2,'Credito'),
+(3,'Debito'),
+(4,'Caneco'),
+(5,'Debito');
+
+insert into Tipo_Endereço
+values
+(1,'Residencial'),
+(2,'Rural'),
+(3,'Condominio'),
+(4,'Residencial'),
+(5,'Comercial');
+
+insert into Tipo_Cartão
+values
+(1,'Funcional'),
+(2,'Departamento'),
+(3,'Pessoal'),
+(4,'Recarregavel'),
+(5,'Comercial');
+
+insert Cargo
+values
+(1,'Pesquisador'),
+(2,'Desenvolvedor'),
+(3,'Alfaiate'),
+(4,'Trader'),
+(5,'Caberubero');
+
+
+insert Estado_civil
+values
+(1,'Solteiro'),
+(2,'Casado'),
+(3,'Enrrolado'),
+(4,'Viuvo'),
+(5,'Casado');
+
+
+insert into Genero
+values
+(1,'Cis','Masculino'),
+(2,'Cis','Feminino'),
+(3,'Homo','Masculino'),
+(4,'Cis','Masculino'),
+(5,'Homo','Feminino');
+
+insert into Filiação
+values
+(1,'Jose Aldo','Gessica Marreta'),
+(2,'Zeca Pagodinho','Karol com K'),
+(3,'Bruno&Marrone','Ines Brasil'),
+(4,'Joao Gomes','Maisa Bom dia e CIA'),
+(5,'Biruliro','Damares');
+
+
+insert into Escolaridade
+values
+(1,'Superior'),
+(2,'Tecnico'),
+(3,'Medio'),
+(4,'Superior'),
+(5,'Fundamental');
+
+
+insert into Produto
+values
+(1,'Arroz Carreteiro',null,'Arroz feito na carreta'),
+(2,'Feijão Tropeiro',null,'Feijão feito na tropa'),
+(3,'Muqueca',null,'Peixe com leite de coco'),
+(4,'Cerveja',null,'A cerveja que tiver'),
+(5,'Coca-Cola',null,'Sugiro água');
+
+insert into Sócio
+values
+(1,null,'S.Senior'),
+(2,null,'S.Pleno'),
+(3,null,'S.Premium'),
+(4,null,'S.Senior'),
+(5,null,'S.Suspect');
+
+insert into Dependente
+values
+(1,null,'Sebastião Salgado'),
+(2,null,'Noel Rosa'),
+(3,null,'Cartola'),
+(4,null,'Zé do Pandeiro'),
+(5,null,'João Suassuna');
+
+insert into Cartão
+values
+(1,777,1,1,1),
+(2,666,2,2,2),
+(3,171,3,3,3),
+(4,157,4,4,4),
+(5,048,5,5,5);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
