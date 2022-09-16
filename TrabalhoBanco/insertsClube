@@ -1,0 +1,166 @@
+
+insert into Pais
+values
+(1,'Brasil'),
+(2,'Vietna'),
+(3,'Mexico'),
+(4,'Chile'),
+(5,'Belgica');
+
+insert into UF
+values
+(1,'Piaui',1),
+(2,'Dong',2),
+(3,'Caracas',3),
+(4,'Andes',4),
+(5,'Sla',5);
+
+insert into Cidade
+values
+(1,55,'Rua de tal',1),
+(2,59,'Rua de Caracas',2),
+(3,95,'Rutal',3),
+(4,84,'Rude',4),
+(5,66,'Rual',5);
+
+insert into Bairro 
+values
+(1,'St Oficina',1),
+(2,'St Escolar',2),
+(3,'St Militar',3),
+(4,'St Medico',4),
+(5,'St Bancario',5);
+
+inset into Rua
+values
+(1,'Rua dos bobos'),
+(2,'Vivendas da Barra'),
+(3,'Anywhere'),
+(4,'Casa do Baralho'),
+(5,'Caba da Mocinha');
+
+insert into Tipo_Telefone
+values
+(1,'Residencial'),
+(2,'Comercial'),
+(3,'Residencial'),
+(4,'Comercial'),
+(5,'Residencial');
+
+insert into Tipo_Pagamento
+values
+(1,'Cheque'),
+(2,'Credito'),
+(3,'Debito'),
+(4,'Caneco'),
+(5,'Debito');
+
+insert into Tipo_Endereço
+values
+(1,'Residencial'),
+(2,'Rural'),
+(3,'Condominio'),
+(4,'Residencial'),
+(5,'Comercial');
+
+insert into Tipo_Cartão
+values
+(1,'Funcional'),
+(2,'Departamento'),
+(3,'Pessoal'),
+(4,'Recarregavel'),
+(5,'Comercial');
+
+insert Cargo
+values
+(1,'Pesquisador'),
+(2,'Desenvolvedor'),
+(3,'Alfaiate'),
+(4,'Trader'),
+(5,'Caberubero');
+
+
+insert Estado_civil
+values
+(1,'Solteiro'),
+(2,'Casado'),
+(3,'Enrrolado'),
+(4,'Viuvo'),
+(5,'Casado');
+
+
+insert into Genero
+values
+(1,'Cis','Masculino'),
+(2,'Cis','Feminino'),
+(3,'Homo','Masculino'),
+(4,'Cis','Masculino'),
+(5,'Homo','Feminino');
+
+insert into Filiação
+values
+(1,'Jose Aldo','Gessica Marreta'),
+(2,'Zeca Pagodinho','Karol com K'),
+(3,'Bruno&Marrone','Ines Brasil'),
+(4,'Joao Gomes','Maisa Bom dia e CIA'),
+(5,'Biruliro','Damares');
+
+
+insert into Escolaridade
+values
+(1,'Superior'),
+(2,'Tecnico'),
+(3,'Medio'),
+(4,'Superior'),
+(5,'Fundamental');
+
+
+insert into Produto
+values
+(1,'Arroz Carreteiro',null,'Arroz feito na carreta'),
+(2,'Feijão Tropeiro',null,'Feijão feito na tropa'),
+(3,'Muqueca',null,'Peixe com leite de coco'),
+(4,'Cerveja',null,'A cerveja que tiver'),
+(5,'Coca-Cola',null,'Sugiro água');
+
+insert into Sócio
+values
+(1,null,'S.Senior'),
+(2,null,'S.Pleno'),
+(3,null,'S.Premium'),
+(4,null,'S.Senior'),
+(5,null,'S.Suspect');
+
+insert into Dependente
+values
+(1,null,'Sebastião Salgado'),
+(2,null,'Noel Rosa'),
+(3,null,'Cartola'),
+(4,null,'Zé do Pandeiro'),
+(5,null,'João Suassuna');
+
+insert into Cartão
+values
+(1,777,1,1,1),
+(2,666,2,2,2),
+(3,171,3,3,3),
+(4,157,4,4,4),
+(5,048,5,5,5);
+
+insert into Endereço
+values
+(1,22,null,'Generico','Tal',1,1)
+
+//Alimentar a tabela endereço antes
+insert into Pessoa
+values
+(1,'Trhall Doom Hammer','123.123.123-12','trhall@gmail.com','2000-05-05',1,1,1,1,1,1,1,1,1,1),
+(2,'Saul Goodman','123.666.523-12','goodman@gmail.com','1979-07-05',2,2,2,2,2,2,2,2,2,2),
+(3,'Dr.Strange','555.193.483-77','cornomaster@gmail.com','1985-08-03',3,3,3,3,3,3,3,3,3,3),
+(4,'Bill do Campinho','163.823.122-62','vamo@gmail.com',1969-04-10,4,4,4,4,4,4,4,4,4,4),
+(1,'Mijair Dinossauro','123.123.123-12','tchutchuca@gmail.com',1964-06-06,5,5,5,5,5,5,5,5,5,5);
+
+
+
+
+
